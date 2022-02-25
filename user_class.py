@@ -87,7 +87,7 @@ class User:
         for product in product_list:
             if product['id'] == int(product_id[1::]):
                 text = '<b>' + str(product['name']) + '</b>' + '\n<b>' + 'цена: ' + '</b>' + \
-                       '<i>' + str(product['зкшсу']) + '</i>' + \
+                       '<i>' + str(product['price']) + '</i>' + \
                        '\n<b>' + 'описание: ' + '</b>' + '<i>' + str(product['description']) + '</i>' + \
                        '\n<b>' + 'количество: ' + '</b>' + '<i>' + str(product['amount']) + '</i>' + \
                        '\n<a href="' + str(product['photo']) + '">' + 'фото' + '</a>'
