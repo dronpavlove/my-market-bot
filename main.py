@@ -37,6 +37,8 @@ def handle_command(message):
         User(message.chat.id, bot, command_text).shop_list(message)
     elif message.text == '/Category' or message.text == '/category':
         User(message.chat.id, bot, command_text).category_list(message)
+    elif message.text == '/Products' or message.text == '/products':
+        User(message.chat.id, bot, command_text).product_list(message)
 
 
 @bot.message_handler(content_types=['text'])
@@ -61,6 +63,9 @@ def handle(call) -> Any:
     elif call.data.split(',')[0] == 'category':
         my_category_id = call.data.split(',')[1]
         User(call.message.chat.id, bot, command_text).category_detail(call.message, my_category_id)
+    elif call.data.split(',')[0] == 'product':
+        my_product_id = call.data.split(' ')[-1]
+        User(call.message.chat.id, bot, command_text).product_detail(call.message, my_product_id)
 
 
 while True:
