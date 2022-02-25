@@ -65,6 +65,7 @@ def handle(call) -> Any:
         User(call.message.chat.id, bot, command_text).category_detail(call.message, my_category_id)
     elif call.data.split(',')[0] == 'product':
         my_product_id = call.data.split(',')[1]
+        print('вот продукт_id', my_product_id)
         User(call.message.chat.id, bot, command_text).product_detail(call.message, my_product_id)
 
 
