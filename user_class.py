@@ -65,6 +65,34 @@ class User:
                    '\n<b>' + 'количество: ' + '</b>' + '<i>' + str(product['amount']) + '</i>' + \
                    '\n<a href="' + str(product['photo']) + '">' + 'фото' + '</a>'
             self.bot.send_message(self.chat_id, text, parse_mode='HTML')
+            
+    def product_list(self, message):
+        text = translate_eng(message.text, "Веду поиск, надо подождать...")
+        markup = types.InlineKeyboardMarkup()
+        url = "http://pavloveav.beget.tech/api/products/"
+        response = requests.get(url)
+        data_deaths = json.loads(response.text)
+        for product in data_deaths:
+            button_text = str(product['name']) + str(product['price'])
+            button = types.InlineKeyboardButton(button_text, callback_data='product, ' + str(product['id']))
+            markup.row(button)
+        self.bot.send_message(self.chat_id, text, reply_markup=markup)
+
+    def product_detail(self, message, product_id):
+        text = translate_eng(message.text, "Веду поиск, надо подождать...")
+        self.bot.send_message(self.chat_id, text)
+        url = f"http://pavloveav.beget.tech/api/products/"
+        response = requests.get(url)
+        product_list = json.loads(response.text)
+        for product in product_list:
+            if product['id'] == int(product_id):
+                text = '<b>' + str(product['name']) + '</b>' + '\n<b>' + 'цена: ' + '</b>' + \
+                       '<i>' + str(product['зкшсу']) + '</i>' + \
+                       '\n<b>' + 'описание: ' + '</b>' + '<i>' + str(product['description']) + '</i>' + \
+                       '\n<b>' + 'количество: ' + '</b>' + '<i>' + str(product['amount']) + '</i>' + \
+                       '\n<a href="' + str(product['photo']) + '">' + 'фото' + '</a>'
+        self.bot.send_message(self.chat_id, text, parse_mode='HTML')
+            
 
 
 def translate_eng(word, text):
