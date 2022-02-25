@@ -85,7 +85,7 @@ class User:
         response = requests.get(url)
         product_list = json.loads(response.text)
         for product in product_list:
-            if product['id'] == int(product_id):
+            if product['id'] == int(product_id[1::]):
                 text = '<b>' + str(product['name']) + '</b>' + '\n<b>' + 'цена: ' + '</b>' + \
                        '<i>' + str(product['зкшсу']) + '</i>' + \
                        '\n<b>' + 'описание: ' + '</b>' + '<i>' + str(product['description']) + '</i>' + \
